@@ -6,16 +6,19 @@ vim.g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- For conciseness
-local opts = { noremap = true, silent = true }
+local opts = { noremap = true, silent = false }
+
+-- Esc
+vim.keymap.set( 'i', 'jj', '<Esc>', opts)
 
 -- save file
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 
--- save file without auto-formatting
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
+-- to Explorer
+vim.keymap.set('n', '<leader>pv', '<cmd> Ex <CR>', opts)
 
--- quit file
-vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
+-- save file without auto-formatting
+-- vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 
 -- delete single character without copying into register
 vim.keymap.set('n', 'x', '"_x', opts)
@@ -52,10 +55,10 @@ vim.keymap.set('n', '<C-h>', ':wincmd h<CR>', opts)
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>', opts)
 
 -- Tabs
-vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', opts) -- open new tab
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-vim.keymap.set('n', '<leader>tp', ':tabn<CR>', opts) --  go to next tab
-vim.keymap.set('n', '<leader>tu', ':tabp<CR>', opts) --  go to previous tab
+vim.keymap.set('n', '<leader>tn', ':tabnew ', opts) -- open new tab
+vim.keymap.set('n', 'tx', ':tabclose ', opts) -- close current tab
+vim.keymap.set('n', 'tp', ':tabn<CR>', opts) --  go to next tab
+vim.keymap.set('n', 'tu', ':tabp<CR>', opts) --  go to previous tab
 
 -- Toggle line wrapping
 vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
@@ -72,3 +75,6 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- File tree
+vim.keymap.set('n', '<C-n>', ':Neotree<CR>', opts)
