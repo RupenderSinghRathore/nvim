@@ -13,7 +13,10 @@ return {
     -- Function to toggle transparency
     local function toggle_transparency()
       local current_transparency = require("tokyonight.config").options.transparent
-      require("tokyonight").setup({ transparent = not current_transparency })
+      require("tokyonight").setup({
+        transparent = not current_transparency,
+        style = "night",
+      })
       vim.cmd.colorscheme("tokyonight") -- Reload colorscheme
     end
 
