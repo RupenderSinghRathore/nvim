@@ -23,4 +23,5 @@ require("lazy").setup({
   require("plugins.comment"),
   require("plugins.auto-tag"),
   require("plugins.misc"),
+  require("plugins.alpha"),
 })
