@@ -311,5 +311,18 @@ return {
     vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     vim.keymap.set("n", "<C-n>", ":Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
     vim.keymap.set("n", "<leader>ngs", ":Neotree float git_status<CR>", { noremap = true, silent = true }) -- open git status window
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "NeoTreeRootChanged",
+      callback = function(ev)
+        local new_root_path = ev.data.root
+
+        if new_root_path then
+          local cd_command = "cd " .. vim.escape(new_root_path, " ")
+          vim.cmd("cd " .. vim.escape(new_root_path, " "))
+          -- Optional: Notification (for testing)
+          -- vim.notify('Neotree root changed to: ' .. new_root_path, vim.log.levels.INFO)
+        end
+      end,
+    })
   end,
 }
