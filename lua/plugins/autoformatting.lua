@@ -12,20 +12,20 @@ return {
       formatter.setup({
         logging = false,
         filetype = {
-        lua = {
-          function()
-            return {
-              exe = "stylua",
-              args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "-" },
-              stdin = true,
-            }
-          end,
-        },
-        go = {
+          lua = {
+            function()
+              return {
+                exe = "stylua",
+                args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "-" },
+                stdin = true,
+              }
+            end,
+          },
+          go = {
             function()
               return {
                 exe = "gofmt",
-                args = {"--"},
+                args = { "--" },
                 stdin = true,
               }
             end,
@@ -34,7 +34,7 @@ return {
             function()
               return {
                 exe = "black",
-                args = {"-"},
+                args = { "-" },
                 stdin = true,
               }
             end,
@@ -43,7 +43,7 @@ return {
             function()
               return {
                 exe = "clang-format",
-                args = {"--style=Google"},
+                args = { "--style=Google" },
                 stdin = true,
               }
             end,
@@ -52,7 +52,7 @@ return {
             function()
               return {
                 exe = "clang-format",
-                args = {"--style=Google"},
+                args = { "--style=Google" },
                 stdin = true,
               }
             end,
@@ -61,7 +61,7 @@ return {
             function()
               return {
                 exe = "prettier",
-                args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+                args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
                 stdin = true,
               }
             end,
@@ -70,7 +70,16 @@ return {
             function()
               return {
                 exe = "prettier",
-                args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+                args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+                stdin = true,
+              }
+            end,
+          },
+          json = {
+            function()
+              return {
+                exe = "prettier",
+                args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
                 stdin = true,
               }
             end,
@@ -79,7 +88,7 @@ return {
             function()
               return {
                 exe = "prettier",
-                args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+                args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
                 stdin = true,
               }
             end,
