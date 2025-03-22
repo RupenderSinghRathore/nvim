@@ -43,7 +43,8 @@ return {
             function()
               return {
                 exe = "clang-format",
-                args = { "--style=Google" },
+                -- args = { "--style=Google" },
+                args = { "--style=file" },
                 stdin = true,
               }
             end,
@@ -52,7 +53,7 @@ return {
             function()
               return {
                 exe = "clang-format",
-                args = { "--style=Google" },
+                args = { "--style=file" },
                 stdin = true,
               }
             end,

@@ -25,7 +25,7 @@ end, opts)
 
 -- Close the terminal
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n><C-o>]], { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- save file without auto-formatting
 -- vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 
@@ -52,7 +52,8 @@ vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<leader>x", ":bdelete!<CR>", opts) -- close buffer
 vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
 
--- Window management vim.keymap.set('n', '<leader>v', '<C-w>v', opts) -- split window vertically
+-- Window management
+vim.keymap.set("n", "<leader>v", "<C-w>v", opts) -- split window vertically
 vim.keymap.set("n", "<leader>h", "<C-w>s", opts) -- split window horizontally
 vim.keymap.set("n", "<leader>=", "<C-w>=", opts) -- make split windows equal width & height
 vim.keymap.set("n", "<leader>xs", ":close<CR>", opts) -- close current split window
@@ -87,3 +88,19 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- File tree
 vim.keymap.set("n", "<C-n>", ":Neotree<CR>", opts)
+
+-- Function to toggle the statusline
+function _G.toggle_statusline()
+  if vim.o.laststatus == 0 then -- just works even with the warning
+    vim.opt.laststatus = 3
+  else
+    vim.opt.laststatus = 0
+  end
+end
+--
+-- Key mapping to toggle the statusline (e.g., <leader>ts)
+vim.keymap.set("n", "<leader>ts", "<cmd>lua toggle_statusline()<cr>", {
+  noremap = true,
+  silent = true,
+  desc = "Toggle statusline visibility",
+})

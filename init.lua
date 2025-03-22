@@ -18,10 +18,12 @@ require("lazy").setup({
   require("plugins.telescope"),
   require("plugins.lsp"),
   require("plugins.autocompletion"),
-  require("plugins.autoformatting"),
+  -- require("plugins.autoformatting"),
   require("plugins.indent-blankline"),
   require("plugins.comment"),
   require("plugins.auto-tag"),
   require("plugins.misc"),
   require("plugins.alpha"),
+  require("plugins.none-ls"),
+  -- require("plugins.rustaceanvim"),
 })

@@ -102,16 +102,16 @@ return {
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.supports_method("textDocument/documentHighlight") then
           local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-          vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.document_highlight,
-          })
-          vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-            buffer = event.buf,
-            group = highlight_augroup,
-            callback = vim.lsp.buf.clear_references,
-          })
+          -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          --   buffer = event.buf,
+          --   group = highlight_augroup,
+          --   callback = vim.lsp.buf.document_highlight,
+          -- })
+          -- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+          --   buffer = event.buf,
+          --   group = highlight_augroup,
+          --   callback = vim.lsp.buf.clear_references,
+          -- })
 
           vim.api.nvim_create_autocmd("LspDetach", {
             group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
@@ -150,12 +150,35 @@ return {
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+    -- Create temporary Cargo.toml for standalone files
+    vim.api.nvim_create_autocmd("BufRead", {
+      pattern = "*.rs",
+      callback = function()
+        local cargo_toml = vim.fn.findfile("Cargo.toml", ".;")
+        if cargo_toml == "" then
+          vim.b.rust_standalone_file = true
+          -- Create minimal virtual manifest
+          require("lspconfig.configs").rust_analyzer.setup({
+            settings = {
+              ["rust-analyzer"] = {
+                standalone = true,
+                cargo = {
+                  noSysroot = true,
+                },
+              },
+            },
+          })
+        end
+      end,
+    })
+
     local servers = {
       clangd = {},
       gopls = {},
       pyright = {},
-      -- rust_analyzer = {},
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
+
+      rust_analyzer = {},
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
       -- https://github.com/pmizio/typescript-tools.nvim
@@ -245,6 +268,11 @@ return {
           require("lspconfig")[server_name].setup(server)
         end,
       },
+    })
+    require("lspconfig").rust_analyzer.setup({
+      root_dir = require("lspconfig.util").root_pattern("Cargo.toml"),
+      settings = servers.rust_analyzer.settings,
+      capabilities = capabilities,
     })
   end,
 }

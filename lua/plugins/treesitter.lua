@@ -33,6 +33,7 @@ return { -- Highlight, edit, and navigate code
       "html",
       "c",
       "cpp",
+      "rust",
     },
     -- Autoinstall languages that are not installed
     auto_install = true,

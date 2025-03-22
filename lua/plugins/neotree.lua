@@ -317,7 +317,7 @@ return {
         local new_root_path = ev.data.root
 
         if new_root_path then
-          local cd_command = "cd " .. vim.escape(new_root_path, " ")
+          -- local cd_command = "cd " .. vim.escape(new_root_path, " ")
           vim.cmd("cd " .. vim.escape(new_root_path, " "))
           -- Optional: Notification (for testing)
           -- vim.notify('Neotree root changed to: ' .. new_root_path, vim.log.levels.INFO)
