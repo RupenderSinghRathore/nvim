@@ -21,9 +21,9 @@ return {
         history = true,
         updateevents = "TextChanged,TextChangedI",
       })
+      -- Define the HTML snippet
 
-      -- Add an HTML snippet that expands the "!" trigger to full HTML boilerplate.
-      ls.add_snippets("html", {
+      local html_snippet = {
         ls.parser.parse_snippet(
           "!",
           [[
@@ -38,8 +38,20 @@ return {
   $0
 </body>
 </html>
-      ]]
+        ]]
         ),
+      }
+
+      -- Add an HTML snippet that expands the "!" trigger to full HTML boilerplate.
+      ls.add_snippets("html", html_snippet)
+      ls.add_snippets("tmpl", html_snippet)
+
+      -- Ensure .tmpl files are treated as HTML
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = "*.tmpl",
+        callback = function()
+          vim.bo.filetype = "html"
+        end,
       })
     end,
   },

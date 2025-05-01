@@ -49,3 +49,20 @@ vim.o.showtabline = 0
 -- vim.opt.winbar = "" -- Removes the winbar
 -- Hide the statusline by default
 vim.opt.laststatus = 0
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*",
+  callback = function()
+    vim.defer_fn(function()
+      vim.api.nvim_echo({}, false, {}) -- Clears the message area
+    end, 1000) -- Adjust delay if messages appear later
+  end,
+})
+vim.api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function()
+    vim.defer_fn(function()
+      vim.api.nvim_echo({}, false, {})
+    end, 1500)
+  end,
+})

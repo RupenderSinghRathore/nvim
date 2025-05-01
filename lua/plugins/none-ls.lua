@@ -47,8 +47,8 @@ return {
 
     local sources = {
 
-    require("none-ls.formatting.rustfmt"),
-            -- Diagnostics
+      require("none-ls.formatting.rustfmt"),
+      -- Diagnostics
       diagnostics.checkmake,
       -- diagnostics.eslint_d,
       -- diagnostics.stylelint,

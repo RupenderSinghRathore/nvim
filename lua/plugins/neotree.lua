@@ -142,6 +142,7 @@ return {
           ["<esc>"] = "cancel", -- close preview or floating neo-tree window
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["l"] = "open",
+          ["h"] = "open",
           ["S"] = "open_split",
           ["s"] = "open_vsplit",
           -- ["S"] = "split_with_window_picker",
@@ -232,6 +233,7 @@ return {
         -- instead of relying on nvim autocmd events.
         window = {
           mappings = {
+            ["<C-b>"] = false,
             ["<BS>"] = "navigate_up",
             ["."] = "set_root",
             ["H"] = "toggle_hidden",
@@ -274,6 +276,7 @@ return {
           mappings = {
             ["bd"] = "buffer_delete",
             ["<BS>"] = "navigate_up",
+            -- ["h"] = "navigate_up",
             ["."] = "set_root",
             ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
             ["oc"] = { "order_by_created", nowait = false },
@@ -309,7 +312,8 @@ return {
     })
 
     vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-    vim.keymap.set("n", "<C-n>", ":Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
+    vim.keymap.set("n", "<C-b>", ":Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
+    vim.keymap.set("i", "<C-b>", "<Esc>:Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
     vim.keymap.set("n", "<leader>ngs", ":Neotree float git_status<CR>", { noremap = true, silent = true }) -- open git status window
     vim.api.nvim_create_autocmd("User", {
       pattern = "NeoTreeRootChanged",

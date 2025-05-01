@@ -12,19 +12,16 @@ local opts = { noremap = true, silent = false }
 vim.keymap.set("i", "jj", "<Esc>", opts)
 vim.keymap.set("i", "JJ", "<Esc>", opts)
 -- save file
-vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
+vim.keymap.set("n", "<leader>s", "<cmd>w<CR>", opts)
 
 -- to Explorer
-vim.keymap.set("n", "<leader>pv", "<cmd> Ex <CR>", opts)
+vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>", opts)
 
 -- Save and open the terminal
-vim.keymap.set("n", "<leader>r", function()
-  vim.cmd("w")
-  vim.cmd("term")
-end, opts)
+vim.keymap.set("n", "<leader>r", "<cmd>term<CR>", opts)
 
 -- Close the terminal
-vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n><C-o>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<C-o>", [[<C-\><C-n><C-o>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- save file without auto-formatting
 -- vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
@@ -86,9 +83,6 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
--- File tree
-vim.keymap.set("n", "<C-n>", ":Neotree<CR>", opts)
-
 -- Function to toggle the statusline
 function _G.toggle_statusline()
   if vim.o.laststatus == 0 then -- just works even with the warning
@@ -104,3 +98,8 @@ vim.keymap.set("n", "<leader>ts", "<cmd>lua toggle_statusline()<cr>", {
   silent = true,
   desc = "Toggle statusline visibility",
 })
+-- Press `<leader><C-r>` to reload your entire Neovim config
+vim.keymap.set("n", "<leader><C-r>", function()
+  vim.cmd("luafile " .. vim.fn.stdpath("config") .. "/init.lua") -- Always targets your config
+  vim.notify("Neovim config reloaded!", vim.log.levels.INFO)
+end, { desc = "Reload Neovim config" })
