@@ -24,6 +24,8 @@ return {
       local opts = { noremap = true, silent = true }
       -- Set custom keybinding to toggle Codeium
       vim.keymap.set("n", "<leader>c", "<cmd>Codeium Toggle<CR>", opts)
+
+      vim.cmd("Codeium Toggle") -- Toggles off by default
     end,
   },
 }
