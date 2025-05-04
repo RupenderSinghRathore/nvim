@@ -34,7 +34,7 @@ return {
     vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
     require("neo-tree").setup({
-      close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+      close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = "rounded",
       enable_git_status = true,
       enable_diagnostics = true,
@@ -314,7 +314,7 @@ return {
     vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     vim.keymap.set("n", "<C-b>", ":Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
     vim.keymap.set("i", "<C-b>", "<Esc>:Neotree toggle position=left<CR>", { noremap = true, silent = true }) -- focus file explorer
-    vim.keymap.set("n", "<leader>ngs", ":Neotree float git_status<CR>", { noremap = true, silent = true }) -- open git status window
+    vim.keymap.set("n", "<leader>ng", ":Neotree float git_status<CR>", { noremap = true, silent = true }) -- open git status window
     vim.api.nvim_create_autocmd("User", {
       pattern = "NeoTreeRootChanged",
       callback = function(ev)

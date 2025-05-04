@@ -13,7 +13,6 @@ vim.keymap.set("i", "jj", "<Esc>", opts)
 vim.keymap.set("i", "JJ", "<Esc>", opts)
 -- save file
 vim.keymap.set("n", "<leader>s", "<cmd>w<CR>", opts)
-vim.keymap.set("n", "<leader>c", "<cmd>Codeium Toggle<CR>", opts)
 
 -- to Explorer
 vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>", opts)
