@@ -28,4 +28,5 @@ require("lazy").setup({
   require("plugins.none-ls"),
   require("plugins.debugger"),
   -- require("plugins.noice"),
+  require("plugins.codium"),
 })
