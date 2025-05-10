@@ -27,6 +27,8 @@ return {
       vim.keymap.set("n", "<leader>df", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
       vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
 
+      vim.keymap.set("n", "<leader>dd", dap.disconnect, { desc = "Disconnect" })
+      vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "Terminate" })
       -- Add these extra keymaps:
 
       -- Stepping Controls
