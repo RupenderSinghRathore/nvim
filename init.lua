@@ -31,4 +31,5 @@ require("lazy").setup({
     require("plugins.codium"),
     require("plugins.snippets"),
     require("plugins.dev"),
+    require("plugins.vim-be-good"),
 })
